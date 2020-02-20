@@ -17,6 +17,12 @@ class Library:
     def get_nb_books(self):
         self.nb_books = len(self.books)
 
+    def get_time_to_scan_books(self):
+        self.time_to_scan = self.nb_books / self.nb_books_per_day
+
+    def sort_score_books(self):
+        self.books_score_sorted = np.sort([v.score for v in self.books.values()])
+
     def score_signup(self):
         """Only account for time to signup
 
@@ -29,8 +35,16 @@ class Library:
         """
         signup = self.score_signup()
         self.get_nb_books()
-        scan = self.books_score * self.nb_books_per_day / self.nb_books
+        scan = self.books_score / self.time_to_scan
         return signup + scan
+
+    def score_time_left(self, time_left):
+        if time_left <= self.nb_days_to_signup:
+            return 0
+        else:
+            time_for_scan = time_left - self.nb_days_to_signup
+            self.sort_score_books()
+            return self.books_score_sorted[0: (time_for_scan * self.nb_books_per_day)]
 
 
 class LibraryBuilder:
