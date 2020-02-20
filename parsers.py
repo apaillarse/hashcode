@@ -25,7 +25,6 @@ def read_input(file_number):
         return args, elements
 
 
-5: 46
 DIRECTORY = "qualification_round_2019.in"
 FILES = os.listdir(DIRECTORY)
 if __name__ == "__main__":
