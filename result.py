@@ -6,6 +6,7 @@
 
 def kw(f, line):
     f.write("%s\n" % line)
+
 class Result:
 
     def __init__(self):
@@ -16,9 +17,9 @@ class Result:
         with open("result/%s" % file, "w") as f:
             kw(f, len(self.library_list))
             for library in self.library_list:
-                print(library)
-                kw(f, " ".join([str(library.id), str(len(library.loaded_books))]))
-                kw(f,  " ".join([str(b.id) for b in library.loaded_books]))
+                if library.loaded_books:
+                    kw(f, " ".join([str(library.id), str(len(library.loaded_books))]))
+                    kw(f,  " ".join([str(b.id) for b in library.loaded_books]))
 
 
 

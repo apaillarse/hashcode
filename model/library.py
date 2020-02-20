@@ -3,9 +3,9 @@ import numpy as np
 
 class Library:
     def __init__(self, id, nb_days_to_signup, nb_books_per_day):
-        self.id = id
-        self.nb_days_to_signup = nb_days_to_signup
-        self.nb_books_per_day = nb_books_per_day
+        self.id = int(id)
+        self.nb_days_to_signup = int(nb_days_to_signup)
+        self.nb_books_per_day = int(nb_books_per_day)
         self.books = {}
         self.init_date = None
         self.loaded_books = []
@@ -20,7 +20,7 @@ class Library:
         self.nb_books = len(self.books)
 
     def get_time_to_scan_books(self):
-        self.time_to_scan = self.nb_books / self.nb_books_per_day
+        return self.nb_books / self.nb_books_per_day
 
     def sort_score_books(self):
         self.books_score_sorted = np.sort([v.score for v in self.books.values()])
@@ -37,7 +37,7 @@ class Library:
         """
         signup = self.score_signup()
         self.get_nb_books()
-        scan = self.books_score / self.time_to_scan
+        scan = self.books_score / self.get_time_to_scan_books()
         return signup + scan
 
     def score_time_left(self, time_left):

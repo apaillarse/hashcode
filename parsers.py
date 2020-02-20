@@ -25,6 +25,7 @@ def read_input(file):
                 elements.append(line)
         return elements
 
+
 def parse_input(file):
     book_builder = BookBuilder()
     library_builder = LibraryBuilder()
@@ -57,7 +58,14 @@ def parse_input(file):
 
 if __name__ == "__main__":
 
-    for file in ["a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt", "e_so_many_books.txt", "f_libraries_of_the_world.txt"]:
+    for file in [
+        "a_example.txt",
+        "b_read_on.txt",
+        "c_incunabula.txt",
+        "d_tough_choices.txt",
+        "e_so_many_books.txt",
+        "f_libraries_of_the_world.txt"
+    ]:
 
         books, libraries, nb_days = parse_input(file)
 
@@ -71,18 +79,36 @@ if __name__ == "__main__":
             for book in lib.books:
                 # print(book)
                 pass
-
+        nbdays_to_process_lib = 0
+        start_day_now = 0
         result = Result()
         for k, library in libraries.items():
             library.loaded_books = list(library.books.values())
-            nbdays_to_process_lib = int(library.nb_days_to_signup) + (len(library.books) / int(library.nb_books_per_day))
-            if nbdays_to_process_lib < int(nb_days):
-                result.library_list.append(library)
 
+            # nbdays_to_process_lib += int(library.nb_days_to_signup) + (len(library.books) / int(library.nb_books_per_day))
+            nbdays_to_process_lib = start_day_now + int(library.nb_days_to_signup) + (
+                    len(library.books) / int(library.nb_books_per_day))
+            # if nbdays_to_process_lib < int(nb_days):
+            #     start_day_now += int(library.nb_days_to_signup)
+            #     result.library_list.append(library)
+            # else:
+            start_day_now += int(library.nb_days_to_signup)
+            available_days = int(nb_days) - int(start_day_now)
+            selected_books = []
+            books_list = list(library.books.values())
+            i = 0
 
-    # result.library_list = libraries.values()
+            while i < len(books_list) and available_days > 0:
+                if available_days > 0:
+                    for j in range(int(library.nb_books_per_day)):
+                        if i + j < len(books_list):
+                            selected_books.append(books_list[i + j])
+                i += int(library.nb_books_per_day)
+                available_days -= 1
+            library.loaded_books = selected_books
+            # print(selected_books)
+
+            result.library_list.append(library)
+
+        # result.library_list = libraries.values()
         result.output(file)
-
-
-
-

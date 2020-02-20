@@ -1,7 +1,7 @@
 class Book:
     def __init__(self, id, score):
-        self.id = id
-        self.score = score
+        self.id = int(id)
+        self.score = int(score)
 
     def __str__(self):
         return f'Book #{self.id} with score {self.score}'
