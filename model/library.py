@@ -7,6 +7,8 @@ class Library:
         self.nb_days_to_signup = nb_days_to_signup
         self.nb_books_per_day = nb_books_per_day
         self.books = {}
+        self.init_date = None
+        self.loaded_books = []
 
     def add_book(self, book):
         self.books[book.id] = book

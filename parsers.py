@@ -2,20 +2,20 @@ import os
 from pprint import pprint
 from model.book import *
 from model.library import *
-
+from result import Result
 
 DIRECTORY = "data"
 FILE = "a_example.txt"
 
 
-def read_input():
+def read_input(file):
     """ Red input
     Args:
         file_number (int): complete filename from the current working directory (ie: directory/file.txt)
     Returns:
         tuple: first the list of args as list of str, second list of lists with elements of each line
     """
-    filename = os.path.join(DIRECTORY, FILE)
+    filename = os.path.join(DIRECTORY, file)
     with open(filename, "r") as file:
         data = file.read()
         elements = []
@@ -25,13 +25,13 @@ def read_input():
                 elements.append(line)
         return elements
 
-def parse_input():
+def parse_input(file):
     book_builder = BookBuilder()
     library_builder = LibraryBuilder()
 
     books = {}
     libraries = {}
-    lines = read_input()
+    lines = read_input(file)
 
     i_line = 0
     for line in lines:
@@ -56,13 +56,33 @@ def parse_input():
 
 
 if __name__ == "__main__":
-    books, libraries, nb_days = parse_input()
 
-    for _, book in books.items():
-        print(book)
+    for file in ["a_example.txt", "b_read_on.txt", "c_incunabula.txt", "d_tough_choices.txt", "e_so_many_books.txt", "f_libraries_of_the_world.txt"]:
 
-    for _, lib in libraries.items():
-        print(lib)
-        for book in lib.books:
-            print(book)
+        books, libraries, nb_days = parse_input(file)
+
+        for _, book in books.items():
+            # print(book)
+            pass
+
+        for _, lib in libraries.items():
+            # print(lib)
+            pass
+            for book in lib.books:
+                # print(book)
+                pass
+
+        result = Result()
+        for k, library in libraries.items():
+            library.loaded_books = list(library.books.values())
+            nbdays_to_process_lib = int(library.nb_days_to_signup) + (len(library.books) / int(library.nb_books_per_day))
+            if nbdays_to_process_lib < int(nb_days):
+                result.library_list.append(library)
+
+
+    # result.library_list = libraries.values()
+        result.output(file)
+
+
+
 
