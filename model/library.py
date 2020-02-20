@@ -3,7 +3,7 @@ import numpy as np
 
 class Library:
     def __init__(self, id, nb_days_to_signup, nb_books_per_day):
-        self.id = int(id)
+        self.id = id
         self.nb_days_to_signup = int(nb_days_to_signup)
         self.nb_books_per_day = int(nb_books_per_day)
         self.books = {}

@@ -82,7 +82,7 @@ if __name__ == "__main__":
         nbdays_to_process_lib = 0
         start_day_now = 0
         result = Result()
-        for k, library in libraries.items():
+        for k, library in sorted(libraries.items(), key=lambda kv: -kv[1].score_signup_scan()):
             library.loaded_books = list(library.books.values())
 
             # nbdays_to_process_lib += int(library.nb_days_to_signup) + (len(library.books) / int(library.nb_books_per_day))
