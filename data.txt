@@ -1,0 +1,25 @@
+B #########################b##################################
+ 100000 books 100 libraires 1000 days
+ tous les livres ont le meme score
+
+C #########################c##################################
+ 100000 books 10000 libaries 100000 days
+
+ scores random entre 0 et 600 ou 800
+
+D #########################d##################################
+ 78600 books 30000 libaries 30001 days
+
+  tous les livres ont le meme score
+  enormement de livres
+
+E #########################e##################################
+ 100000 books 1000 libaries 200 days
+beaucoup de livres, tres peu de jours
+
+scores random entre 0 et 200
+F #########################f##################################
+ 100000 books 1000 libaries 700 days
+
+score randon entre 0 et 200
+
